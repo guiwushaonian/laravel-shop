@@ -15,7 +15,7 @@ class UsersAddEmailVerified extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->boolean('email_verified')->defalut(false)->after('remember_token');
+            $table->boolean('email_verified')->default(false)->after('remember_token');
         });
     }
 
