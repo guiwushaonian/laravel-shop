@@ -44,6 +44,7 @@ class EmailVerificationNotification extends Notification
     public function toMail($notifiable)
     {
         $token = Str::random(16);
+        // 往缓存中写入这个随机字符串，有效时间为 30 分钟。
         Cache::set('email_verification_' . $notifiable->email, $token, 30);
         $url = route('email_verification.verify', ['email' => $notifiable->email, 'token' => $token]);
 
