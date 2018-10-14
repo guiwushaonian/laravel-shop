@@ -34,4 +34,37 @@ class UserAddressesController extends Controller
 
         return redirect()->route('user_addresses.index');
     }
+
+    public function edit(UserAddress $userAddress)
+    {
+        $this->authorize('own', $userAddress);
+        return view('user_addresses.create_and_edit', ['address' => $userAddress]);
+    }
+
+    public function update(UserAddress $userAddress, UserAddressRequest $userAddressRequest)
+    {
+        $this->authorize('own', $userAddress);
+
+        $userAddress->update($userAddressRequest->only([
+            'province',
+            'city',
+            'district',
+            'address',
+            'zip',
+            'contact_name',
+            'contact_phone',
+        ]));
+
+        return redirect()->route('user_addresses.index');
+    }
+
+    public function destroy(UserAddress $userAddress)
+    {
+        $this->authorize('own', $userAddress);
+        
+        $userAddress->delete();
+
+        //return redirect()->route('user_addresses.index');
+        return [];
+    }
 }
