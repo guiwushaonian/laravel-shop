@@ -61,7 +61,7 @@ class UserAddressesController extends Controller
     public function destroy(UserAddress $userAddress)
     {
         $this->authorize('own', $userAddress);
-        
+
         $userAddress->delete();
 
         //return redirect()->route('user_addresses.index');
